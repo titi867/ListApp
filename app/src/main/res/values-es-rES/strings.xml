@@ -36,5 +36,16 @@
     <string name="password_8_char">La contraseña debe tener 8 caracteres o más</string>
     <string name="password_must_be_the_same">Las contraseñas deben coincidir</string>
     <string name="password_is_reset">La contraseña ha sido reestablecida</string>
+    <string name="sign_up">Registrar</string>
+    <string name="change_photo">Cambiar foto</string>
+    <string name="nickname">NOMBRE DE USUARIO</string>
+    <string name="enter_your_nickname">Ingresa tu nombre de usuario</string>
+    <string name="birthday">CUMPLEAÑOS</string>
+    <string name="enter_your_birthday">Ingresa tu cumpleaños</string>
+    <string name="form_mail">CORREO</string>
+    <string name="form_your_email">Ingresa tu correo electrónico</string>
+    <string name="enter_your_password">Ingresa tu contraseña</string>
+    <string name="Form_sign_up">Registrar</string>
+    <string name="log_in">Iniciar sesión</string>
 
 </resources>

@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/formFragment"
-        android:name="com.example.listapp.formFragment"
+        android:name="com.example.listapp.FormFragment"
         android:label="fragment_form"
         tools:layout="@layout/fragment_form" />
 </navigation>
