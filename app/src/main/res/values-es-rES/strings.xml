@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">App de listado</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="register">Registrar</string>
+    <string name="forgotpassword">¿Olvidaste la contraseña?</string>
+    <string name="submit">Iniciar sesión</string>
+    <string name="loginfacebook">Iniciar con Facebook</string>
+    <string name="logingmail">Iniciar con Gmail</string>
+    <string name="contact">Contacto</string>
+    <string name="address">Dirección</string>
+    <string name="phone">Teléfono</string>
+    <string name="email">Correo electrónico</string>
+    <string name="send">Enviar</string>
+    <string name="gundamList">Lista de Gundam</string>
+    <string name="sentContact">Contacto enviado</string>
+    <string name="welcome">¡Bienvenido!</string>
+    <string name="userRegistered">Usuario registrado</string>
+    <string name="recoverPasswordSent">Revisa tu correo para reestablecer tu contraseña</string>
+    <string name="loggingInWithFacebook">Iniciando sesión con Facebook</string>
+    <string name="loggingInWithGoogle">Iniciando sesión con Google</string>
+    <string name="userNameRequired">El usuario es requerido</string>
+    <string name="passwordRequired">La contraseña es requerida</string>
+    <string name="ivPhoneDescription">Botón de teléfono</string>
+    <string name="ivMailDescription">Botón de mail</string>
+    <string name="ivWhatsappDescription">Botón de Whatsapp</string>
+    <string name="ivAddressDescription">Botón de dirección</string>
+    <string name="reset_your_password">Reestablece tu contraseña</string>
+    <string name="enter_your_email">Ingresa tu correol</string>
+    <string name="enter_your_new_password">Ingresa tu nueva contraseña</string>
+    <string name="confirm_your_password">Confirma tu nueva contraseña</string>
+    <string name="reset_password">Reestablecer contraseña</string>
+    <string name="register_new_user">Registrar nuevo usuario</string>
+    <string name="write_valid_email">Ingresa un correo electrónico válido</string>
+    <string name="password_8_char">La contraseña debe tener 8 caracteres o más</string>
+    <string name="password_must_be_the_same">Las contraseñas deben coincidir</string>
+    <string name="password_is_reset">La contraseña ha sido reestablecida</string>
+
+</resources>

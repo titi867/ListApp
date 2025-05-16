@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">ListApp</string>
+    <string name="logo" translatable="false">Logo</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="register">Register Here</string>
+    <string name="forgotpassword">Forgot Password?</string>
+    <string name="submit">Login</string>
+    <string name="loginfacebook">Login with Facebook</string>
+    <string name="logingmail">Login with Gmail</string>
+    <string name="contact">Contact</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="email">E-mail</string>
+    <string name="send">Send</string>
+    <string name="gundamList">Gundam list</string>
+    <string name="sentContact">Sent</string>
+    <string name="welcome">Welcome!</string>
+    <string name="userRegistered">User registered</string>
+    <string name="recoverPasswordSent">Check your email to reset your password</string>
+    <string name="loggingInWithFacebook">Logging in with Facebook</string>
+    <string name="loggingInWithGoogle">Logging in with Google</string>
+    <string name="userNameRequired">User name is required</string>
+    <string name="passwordRequired">Password is required</string>
+    <string name="ivPhoneDescription">Phone button</string>
+    <string name="ivMailDescription">Mail button</string>
+    <string name="ivWhatsappDescription">Whatsapp button</string>
+    <string name="ivAddressDescription">Address button</string>
+    <string name="reset_your_password">Reset your password</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_new_password">Enter your new password</string>
+    <string name="confirm_your_password">Confirm your password</string>
+    <string name="reset_password">Reset password</string>
+    <string name="register_new_user">Register new user</string>
+    <string name="write_valid_email">Write a valid email</string>
+    <string name="password_8_char">Password should have 8 characters or more</string>
+    <string name="password_must_be_the_same">Passwords must be the same</string>
+    <string name="password_is_reset">Password is reset</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
