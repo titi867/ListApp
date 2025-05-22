@@ -65,7 +65,7 @@
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/textInputLayoutNickname"
              android:layout_width="match_parent"
-             android:layout_height="40dp"
+             android:layout_height="48dp"
              android:layout_marginStart="28dp"
              android:layout_marginEnd="28dp"
              android:hint="@string/enter_your_nickname"
@@ -93,7 +93,7 @@
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/textInputLayoutBirthDay"
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"
+             android:layout_height="48dp"
              android:layout_marginStart="28dp"
              android:layout_marginEnd="28dp"
              android:hint="@string/enter_your_birthday"
@@ -121,7 +121,7 @@
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/textInputLayoutFormEmail"
              android:layout_width="match_parent"
-             android:layout_height="40dp"
+             android:layout_height="48dp"
              android:layout_marginStart="28dp"
              android:layout_marginEnd="28dp"
              android:hint="@string/form_your_email"
@@ -149,7 +149,7 @@
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/textInputLayoutPassword"
              android:layout_width="match_parent"
-             android:layout_height="40dp"
+             android:layout_height="48dp"
              android:layout_marginStart="28dp"
              android:layout_marginEnd="28dp"
              android:hint="@string/enter_your_password"
@@ -170,15 +170,14 @@
              android:layout_marginStart="102dp"
              android:layout_marginTop="16dp"
              android:layout_marginEnd="103dp"
-             android:layout_marginBottom="13dp"
              android:backgroundTint="@color/grey"
              android:text="@string/Form_sign_up"
              android:textColor="@color/black"
              android:textSize="24sp"
              android:textStyle="bold"
              app:cornerRadius="0dp"
-             app:layout_constraintBottom_toTopOf="@+id/btnFormLogIn"
              app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="1.0"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
 

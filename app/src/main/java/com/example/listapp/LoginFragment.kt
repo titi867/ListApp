@@ -26,6 +26,7 @@ class LoginFragment : Fragment() {
 
         val btnRegister = view.findViewById<Button>(R.id.btnRegister)
         val btnForgotPassword = view.findViewById<Button>(R.id.btnForgotPassword)
+        val btnLogin = view.findViewById<Button>(R.id.btnLogin)
         val navController = findNavController()
 
         btnRegister.setOnClickListener {
@@ -34,6 +35,10 @@ class LoginFragment : Fragment() {
 
         btnForgotPassword.setOnClickListener{
             navController.navigate(R.id.action_loginFragment_to_passwordRecoveryFragment)
+        }
+
+        btnLogin.setOnClickListener{
+            navController.navigate(R.id.action_loginFragment_to_dashboardFragment)
         }
 
         return view

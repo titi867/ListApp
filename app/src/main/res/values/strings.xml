@@ -48,5 +48,14 @@
     <string name="enter_your_password">Enter your password</string>
     <string name="Form_sign_up">Sign Up</string>
     <string name="log_in">Log in</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="logout">Logout</string>
+    <string name="sort">Sort</string>
+    <string name="search">Search</string>
+    <string name="slideshow">SlideShow</string>
+    <string name="galery">Galery</string>
+    <string name="home">Home</string>
+
 
 </resources>
