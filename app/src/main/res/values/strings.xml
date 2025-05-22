@@ -36,7 +36,6 @@
     <string name="password_8_char">Password should have 8 characters or more</string>
     <string name="password_must_be_the_same">Passwords must be the same</string>
     <string name="password_is_reset">Password is reset</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="sign_up">Sign up</string>
     <string name="change_photo">Change photo</string>
     <string name="nickname">NICKNAME</string>
@@ -54,8 +53,10 @@
     <string name="sort">Sort</string>
     <string name="search">Search</string>
     <string name="slideshow">SlideShow</string>
-    <string name="galery">Galery</string>
+    <string name="galery">Models</string>
     <string name="home">Home</string>
+    <string name="fav">Favorites</string>
+    <string name="list">List</string>
 
 
 </resources>

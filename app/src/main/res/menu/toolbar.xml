@@ -4,17 +4,20 @@
 <item
     android:id="@+id/action_search"
     android:title="@string/search"
+    android:icon="@drawable/lupa"
     app:actionViewClass="androidx.appcompat.widget.SearchView"
     app:showAsAction="ifRoom|collapseActionView" />
 
 <item
     android:id="@+id/action_sort"
     android:title="@string/sort"
+    android:icon="@drawable/sort"
     app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_logout"
         android:title="@string/logout"
+        android:icon="@drawable/logout"
         app:showAsAction="never" />
 
 </menu>

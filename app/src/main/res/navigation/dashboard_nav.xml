@@ -15,4 +15,9 @@
         android:name="com.example.listapp.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/favFragment"
+        android:name="com.example.listapp.FavFragment"
+        android:label="fragment_fav"
+        tools:layout="@layout/fragment_fav" />
 </navigation>

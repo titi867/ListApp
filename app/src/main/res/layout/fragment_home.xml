@@ -1,14 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/logo_gundam"
+        android:layout_width="343dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/logo_gundam"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tvContacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contact"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_gundam" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvContacto"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivPhone"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            style="@style/AccountTextStyle"
+            android:src="@drawable/logo_tel"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/ivPhoneDescription"/>
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            style="@style/AccountTextStyle"
+            android:hint="@string/phone"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutMail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPhone"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivMail"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/logo_mail"
+            style="@style/AccountTextStyle"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/ivMailDescription"/>
+
+
+        <EditText
+            android:id="@+id/editTextMail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            style="@style/AccountTextStyle"
+            android:hint="@string/email"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutMail"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivAddress"
+            android:layout_height="48dp"
+            android:layout_width="48dp"
+            style="@style/AccountTextStyle"
+            android:src="@drawable/logo_ubicacion"
+            android:contentDescription="@string/ivAddressDescription"/>
+
+        <EditText
+            android:ems="10"
+            android:id="@+id/editTextAddress"
+            android:inputType="textEmailAddress"
+            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:hint="@string/address"
+            style="@style/AccountTextStyle"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivMap"
+        android:layout_width="318dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/map"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutAddress" />
+
+    <Button
+        android:id="@+id/btnContact"
+        style="@style/AccountButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sentContact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivMap"/>
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:srcCompat="@drawable/logo_whatsapp"
+        android:id="@+id/ivWhatsapp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/ivWhatsappDescription"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

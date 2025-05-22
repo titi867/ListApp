@@ -4,7 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ListFragment">
+    tools:context=".FavFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/fav" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,6 +37,5 @@
         </Button>
 
     </LinearLayout>
-
 
 </FrameLayout>

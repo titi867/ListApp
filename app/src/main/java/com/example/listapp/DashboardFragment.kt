@@ -9,7 +9,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.listapp.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -33,7 +34,27 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = findNavController()
+    //    navController = findNavController()
+
+        //obtener el navController desde el navHostFragment (llamada implícita desde el navGraph)
+        val navHostFragment = childFragmentManager
+            .findFragmentById(R.id.fragment_container_view) as NavHostFragment
+        navController = navHostFragment.navController
+
+        //conecta el bottomNavigation a la vista del BottomNavigationView
+        NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
+
+        binding.navigation.setNavigationItemSelectedListener { menuItem ->
+            val handled = NavigationUI.onNavDestinationSelected(menuItem, navController)
+            if (handled){
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            handled
+        }
+
+        binding.floatingActionButton.setOnClickListener {
+            navController.navigate(R.id.listFragment)
+        }
 
         onBackPressedCallback = object:OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -45,20 +66,25 @@ class DashboardFragment : Fragment() {
             }
         }
 
-    activity?.onBackPressedDispatcher?.addCallback(requireActivity(), onBackPressedCallback)
+    activity?.onBackPressedDispatcher?.addCallback(requireActivity(),
+        onBackPressedCallback)
 
         // (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         toggle = ActionBarDrawerToggle(
-            activity, binding.drawerLayout, binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        )
+            activity, binding.drawerLayout, binding.toolbar, R.string.
+            navigation_drawer_open, R.string.navigation_drawer_close)
+
+
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
 
         binding.toolbar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId) {
 
                 R.id.action_logout -> {
-                    navController.navigate(R.id.action_dashboardFragment_to_loginFragment)
+                 //   navController.navigate(R.id.action_dashboardFragment_to_loginFragment)
                     true
                 }
                 else -> false
