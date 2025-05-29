@@ -65,7 +65,7 @@
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/textInputLayoutNickname"
              android:layout_width="match_parent"
-             android:layout_height="48dp"
+             android:layout_height="68dp"
              android:layout_marginStart="28dp"
              android:layout_marginEnd="28dp"
              android:hint="@string/enter_your_nickname"
@@ -93,7 +93,7 @@
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/textInputLayoutBirthDay"
              android:layout_width="match_parent"
-             android:layout_height="48dp"
+             android:layout_height="68dp"
              android:layout_marginStart="28dp"
              android:layout_marginEnd="28dp"
              android:hint="@string/enter_your_birthday"
@@ -103,7 +103,7 @@
                  android:id="@+id/etBirthday"
                  style="@style/AccountTextStyle"
                  android:layout_width="match_parent"
-                 android:layout_height="40dp" />
+                 android:layout_height="wrap_content" />
 
          </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +121,7 @@
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/textInputLayoutFormEmail"
              android:layout_width="match_parent"
-             android:layout_height="48dp"
+             android:layout_height="68dp"
              android:layout_marginStart="28dp"
              android:layout_marginEnd="28dp"
              android:hint="@string/form_your_email"
@@ -141,7 +141,7 @@
              android:layout_height="wrap_content"
              android:layout_marginStart="28dp"
              android:layout_marginTop="18dp"
-             android:text="@string/form_mail"
+             android:text="@string/form_password"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFormEmail"
              android:textColor="@color/white"/>
@@ -149,7 +149,7 @@
          <com.google.android.material.textfield.TextInputLayout
              android:id="@+id/textInputLayoutPassword"
              android:layout_width="match_parent"
-             android:layout_height="48dp"
+             android:layout_height="68dp"
              android:layout_marginStart="28dp"
              android:layout_marginEnd="28dp"
              android:hint="@string/enter_your_password"
@@ -158,6 +158,7 @@
              <com.google.android.material.textfield.TextInputEditText
                  android:id="@+id/etFormPassword"
                  style="@style/AccountTextStyle"
+                 android:inputType="textPassword"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content" />
 

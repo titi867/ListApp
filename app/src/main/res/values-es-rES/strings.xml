@@ -45,6 +45,7 @@
     <string name="form_mail">CORREO</string>
     <string name="form_your_email">Ingresa tu correo electrónico</string>
     <string name="enter_your_password">Ingresa tu contraseña</string>
+    <string name="form_password">CONTRASEÑA></string>
     <string name="Form_sign_up">Registrar</string>
     <string name="log_in">Iniciar sesión</string>
     <string name="navigation_drawer_open">Abrir</string>

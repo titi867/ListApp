@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1072754476250",
+    "project_id": "gundam-listapp",
+    "storage_bucket": "gundam-listapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072754476250:android:85d4a74ccb742bc6eed1e3",
+        "android_client_info": {
+          "package_name": "com.example.listapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCoFaq2VWJWSeduSGRbrlsYY5YfXr4VWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

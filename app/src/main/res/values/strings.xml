@@ -45,6 +45,7 @@
     <string name="form_mail">EMAIL</string>
     <string name="form_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
+    <string name="form_password">PASSWORD</string>
     <string name="Form_sign_up">Sign Up</string>
     <string name="log_in">Log in</string>
     <string name="navigation_drawer_open">Open</string>
