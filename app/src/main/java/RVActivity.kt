@@ -22,24 +22,24 @@ class RVActivity : AppCompatActivity() {
         setContentView(R.layout.activity_rvactivity)
 
         // Datos de prueba
-            val gundamList = listOf (
-
-                Gundam(1, "Kimaris", "Unit", R.drawable.kimaris),
-                Gundam(2, "Aerial", "Unit", R.drawable.aerial),
-                Gundam(3, "Fenice Rinascita", "Unit", R.drawable.fenice_rinascita),
-                Gundam(4, "Shin Musha", "Unit", R.drawable.shin_musha),
-                Gundam(5, "Astray", "Unit", R.drawable.astray),
-                Gundam(6, "Duel Blitz", "Unit", R.drawable.duel_blitz),
-                Gundam(7, "Gunpla", "Unit", R.drawable.gunpla),
-                Gundam(8, "Heavy Arms", "Unit", R.drawable.heavy_arms)
-        )
+//            val gundamList = listOf (
+//
+////                Gundam(1, "Kimaris", "Unit", R.drawable.kimaris),
+////                Gundam(2, "Aerial", "Unit", R.drawable.aerial),
+////                Gundam(3, "Fenice Rinascita", "Unit", R.drawable.fenice_rinascita),
+////                Gundam(4, "Shin Musha", "Unit", R.drawable.shin_musha),
+////                Gundam(5, "Astray", "Unit", R.drawable.astray),
+////                Gundam(6, "Duel Blitz", "Unit", R.drawable.duel_blitz),
+////                Gundam(7, "Gunpla", "Unit", R.drawable.gunpla),
+////                Gundam(8, "Heavy Arms", "Unit", R.drawable.heavy_arms)
+//        )
 
         val recyclerView = findViewById<RecyclerView>(R.id.rvItems)
         //define la estructura de cómo se va a estructurar la lista
         recyclerView.layoutManager = LinearLayoutManager(this)
         //define la estructura individual de los elementos de la lista
         //adaptando la información de los elementos de la lista a los views
-        recyclerView.adapter = GundamAdapter(gundamList)
+        //recyclerView.adapter = GundamAdapter(gundamList)
 
         val btnContact = findViewById<Button>(R.id.btnContacto)
         btnContact.setOnClickListener{

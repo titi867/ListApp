@@ -55,8 +55,7 @@ android {
         implementation(platform("com.google.firebase:firebase-bom:33.14.0"))
         implementation("com.google.firebase:firebase-auth")
         implementation("com.google.firebase:firebase-firestore")
+        implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
     }
-}
-dependencies {
-    implementation(libs.firebase.auth.ktx)
 }

@@ -89,11 +89,13 @@ class DashboardFragment : Fragment() {
                 R.id.action_logout -> {
                     FirebaseAuth.getInstance().signOut()
 
-                    val navOptions = NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, true).build()
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.splashScreenFragment, true)
+                        .build()
 
-                    //Redirigir el loginfragment y limpiar el stacck
+                    //Redirigir al loginfragment y limpiar el stacck
                     //Obtenemos el navController definido en el activityMain que es el que usa el login_nav
-                    val parentNavController = requireActivity().findNavController(R.id.login_fragment_container_view)
+                    val parentNavController  = requireActivity().findNavController(R.id.login_fragment_container_view)
                     parentNavController.navigate(R.id.action_dashboardFragment_to_loginFragment, null, navOptions)
                     true
                 }

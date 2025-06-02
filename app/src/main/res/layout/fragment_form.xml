@@ -141,7 +141,7 @@
              android:layout_height="wrap_content"
              android:layout_marginStart="28dp"
              android:layout_marginTop="18dp"
-             android:text="@string/form_password"
+             android:text="PASSWORD"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFormEmail"
              android:textColor="@color/white"/>

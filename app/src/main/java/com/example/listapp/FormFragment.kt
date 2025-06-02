@@ -11,8 +11,9 @@ import android.widget.ImageView
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.example.listapp.databinding.FragmentFormBinding
+import com.example.listapp.databinding.FragmentLoginBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -36,11 +37,8 @@ class FormFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().navigateUp()
         }
-
         binding = FragmentFormBinding.inflate(layoutInflater)
         return binding.root
-
-        return inflater.inflate(R.layout.fragment_form, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,10 +54,13 @@ class FormFragment : Fragment() {
             val password = binding.etFormPassword.text.toString().trim()
 
             val nickname = binding.etNickname.text.toString().trim()
-            var birthDate = binding.etBirthday.text.toString().trim()
+            val birthDate = binding.etBirthday.text.toString().trim()
 
-            //validación de los campos
-            //falta validación del correo
+            //validacion de los campos
+            //TODO validacion de formato de correo
+            //TODO convertir texto estatico a recursos en string
+            //TODO usar datepicker
+            //TODO campo de contraseña con formato de password
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -77,7 +78,7 @@ class FormFragment : Fragment() {
                                 Handler(Looper.getMainLooper()).postDelayed({
                                     findNavController().navigate(R.id.action_formFragment_to_loginFragment)
                                 }, 2000)
-                            }.addOnFailureListener {
+                            }.addOnFailureListener{
                                 Snackbar.make(view, "Error al guardar datos de usuario", Snackbar.LENGTH_SHORT).show()
                             }
                         }
@@ -85,7 +86,6 @@ class FormFragment : Fragment() {
                     } else {
                         Snackbar.make(it, "Error al crear usuario", Snackbar.LENGTH_SHORT).show()
                     }
-
                 }
             } else {
                 Snackbar.make(it, "Ingresa el usuario y contraseña", Snackbar.LENGTH_SHORT).show()

@@ -3,13 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/green"
     tools:context=".FavFragment">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/fav" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,23 +13,24 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/iv_favListfragmentLogo"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/logo_gundam2"
+            android:clickable="true"
             android:layout_marginTop="30dp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvItems"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/favSwipeRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btnContacto"
-            style="@style/SocialButtonStyle"
-            android:backgroundTint="@color/green"
-            android:text= "@string/contact"
-            android:layout_marginBottom="60dp">
-        </Button>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFavItems"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

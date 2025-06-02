@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.activity.addCallback
-import com.example.listapp.databinding.FragmentFormBinding
 import com.example.listapp.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -24,7 +23,7 @@ class LoginFragment : Fragment() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
-           }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +32,7 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,39 +45,38 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val email= binding.etUsuario.text.toString().trim()
-            val password= binding.etContrasena.text.toString().trim()
+            val email = binding.etUsuario.text.toString().trim()
+            val password = binding.etContrasena.text.toString().trim()
             if (email.isNotEmpty() && password.isNotEmpty()){
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                    if (task.isSuccessful){
+                    if(task.isSuccessful){
                         val userId = auth.currentUser?.uid
                         if(userId != null) {
                             firestore.collection("users").document(userId).get().addOnSuccessListener { document ->
-                                if (document != null && document.exists()){
+                                if(document != null && document.exists()){
                                     val nickname = document.getString("nickname")
-                                    val message = "Welcome, $nickname!!"
+                                    val message = "Bienvenido, $nickname!!"
                                     Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
                                     findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
                                 }
                             }.addOnFailureListener {
-                                Snackbar.make(view, "Username not found", Snackbar.LENGTH_SHORT).show()
+                                Snackbar.make(view, "Datos del usuario no encontrados", Snackbar.LENGTH_SHORT).show()
                             }
-
                         }
                     } else {
                         val TAG = "LoginFragment"
                         android.util.Log.e(TAG, "Login failed", task.exception)
                         Snackbar.make(view, "Login failed", Snackbar.LENGTH_SHORT).show()
                     }
-
                 }
             } else {
-                Snackbar.make(it, "Please enter email and password", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(view, "Please enter email and password", Snackbar.LENGTH_SHORT).show()
             }
 
+
         }
-
-
+//ray.esro@gmail.com
 
     }
+
 }
