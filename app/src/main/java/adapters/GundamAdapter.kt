@@ -1,5 +1,6 @@
 package com.example.listapp.adapters
 
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,10 @@ import com.example.listapp.models.Gundam
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listapp.R
 
-class GundamAdapter(private val gundamList: List<Gundam>)
+class GundamAdapter(
+    private val gundamList: List<Gundam>,
+    private val onFavoriteClick: (Gundam) -> Unit //callback
+)
  : RecyclerView.Adapter<GundamAdapter.ItemViewHolder>() {
 
         //ViewHolder
@@ -20,6 +24,7 @@ class GundamAdapter(private val gundamList: List<Gundam>)
             val ivName: TextView = view.findViewById(R.id.ivName)
             val ivDescription: TextView = view.findViewById(R.id.ivDescription)
             val ivItem: ImageView = view.findViewById(R.id.ivLogo)
+            val ivEsFavorito : ImageView = view.findViewById(R.id.ivIsFavorite)
         }
 
     //Reciber la información del paren que utiliza este ItemAdapter,
@@ -33,10 +38,19 @@ class GundamAdapter(private val gundamList: List<Gundam>)
 
     //Se hace el bind o llenado de información de un item del listado a la vista
     override fun onBindViewHolder(holder: GundamAdapter.ItemViewHolder, position: Int) {
-        val item = gundamList[position]
-        holder.ivItem.setImageResource(item.ImagenId)
-        holder.ivName.text = item.Nombre
-        holder.ivDescription.text = item.Tipo
+        val gundam = gundamList[position]
+        //holder.ivItem.setImageResource(item.ImagenId)
+        holder.ivName.text = gundam.Nombre
+        holder.ivDescription.text = gundam.Tipo
+        holder.ivEsFavorito.setImageResource(
+            if(gundam.EsFavorito)
+                R.drawable.ic_star_filled
+            else
+                R.drawable.ic_star_outline
+        )
+        holder.ivEsFavorito.setOnClickListener {
+            onFavoriteClick(gundam)
+        }
     }
 
     //Función que retorna el tamaño del listado

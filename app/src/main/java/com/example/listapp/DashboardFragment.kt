@@ -9,9 +9,12 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.listapp.databinding.FragmentDashboardBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class DashboardFragment : Fragment() {
 
@@ -84,7 +87,16 @@ class DashboardFragment : Fragment() {
             when(menuItem.itemId) {
 
                 R.id.action_logout -> {
-                 //   navController.navigate(R.id.action_dashboardFragment_to_loginFragment)
+                    FirebaseAuth.getInstance().signOut()
+
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.splashScreenFragment, true)
+                        .build()
+
+                    //Redirigir al loginfragment y limpiar el stacck
+                    //Obtenemos el navController definido en el activityMain que es el que usa el login_nav
+                    val parentNavController  = requireActivity().findNavController(R.id.login_fragment_container_view)
+                    parentNavController.navigate(R.id.action_dashboardFragment_to_loginFragment, null, navOptions)
                     true
                 }
                 else -> false

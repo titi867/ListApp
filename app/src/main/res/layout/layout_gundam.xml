@@ -7,11 +7,13 @@
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="60dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="60dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="2"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -32,4 +34,14 @@
         </TextView>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivIsFavorite"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_star_outline"
+        android:contentDescription="IsFavorite"
+        android:scaleType="centerInside"/>
+
 </LinearLayout>

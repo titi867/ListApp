@@ -1,9 +1,9 @@
 package com.example.listapp.models
 
-class Gundam (
-
-    val Id: Int,
-    val Nombre: String,
-    val Tipo: String,
-    val ImagenId: Int,
+data class Gundam (
+    var Id: String = "",
+    var Nombre: String = "",
+    var Tipo: String= "",
+    var EsFavorito: Boolean = false
 )
+

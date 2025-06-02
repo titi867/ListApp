@@ -8,39 +8,75 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.activity.addCallback
+import com.example.listapp.databinding.FragmentLoginBinding
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginFragment : Fragment() {
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-           }
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
-
-        val btnRegister = view.findViewById<Button>(R.id.btnRegister)
-        val btnForgotPassword = view.findViewById<Button>(R.id.btnForgotPassword)
-        val btnLogin = view.findViewById<Button>(R.id.btnLogin)
-        val navController = findNavController()
-
-        btnRegister.setOnClickListener {
-            navController.navigate(R.id.action_loginFragment_to_formFragment)
-        }
-
-        btnForgotPassword.setOnClickListener{
-            navController.navigate(R.id.action_loginFragment_to_passwordRecoveryFragment)
-        }
-
-        btnLogin.setOnClickListener{
-            navController.navigate(R.id.action_loginFragment_to_dashboardFragment)
-        }
-
-        return view
+        binding = FragmentLoginBinding.inflate(layoutInflater)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnRegister.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_formFragment)
+        }
+
+        binding.btnForgotPassword.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_passwordRecoveryFragment)
+        }
+
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etUsuario.text.toString().trim()
+            val password = binding.etContrasena.text.toString().trim()
+            if (email.isNotEmpty() && password.isNotEmpty()){
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        val userId = auth.currentUser?.uid
+                        if(userId != null) {
+                            firestore.collection("users").document(userId).get().addOnSuccessListener { document ->
+                                if(document != null && document.exists()){
+                                    val nickname = document.getString("nickname")
+                                    val message = "Bienvenido, $nickname!!"
+                                    Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+                                    findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
+                                }
+                            }.addOnFailureListener {
+                                Snackbar.make(view, "Datos del usuario no encontrados", Snackbar.LENGTH_SHORT).show()
+                            }
+                        }
+                    } else {
+                        val TAG = "LoginFragment"
+                        android.util.Log.e(TAG, "Login failed", task.exception)
+                        Snackbar.make(view, "Login failed", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+            } else {
+                Snackbar.make(view, "Please enter email and password", Snackbar.LENGTH_SHORT).show()
+            }
+
+
+        }
+//ray.esro@gmail.com
+
+    }
+
 }
