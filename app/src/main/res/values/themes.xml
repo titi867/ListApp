@@ -1,9 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Tema base para la app -->
     <style name="Base.Theme.ListApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Tu configuración normal -->
     </style>
 
+    <!-- Tema principal -->
     <style name="Theme.ListApp" parent="Base.Theme.ListApp" />
+
+    <!-- Tema para el SplashScreen -->
+    <style name="Theme.ListApp.Splash" parent="Theme.SplashScreen">
+        <!-- Fondo blanco -->
+        <item name="windowSplashScreenBackground">@color/white</item>
+
+        <!-- Ícono animado (usa logo_gundam2 como drawable o vector) -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_gundam2</item>
+
+        <!-- Opcional: fondo circular tras el icono -->
+        <item name="windowSplashScreenIconBackgroundColor">@color/white</item>
+
+        <!-- Tema que se aplicará después del splash -->
+        <item name="postSplashScreenTheme">@style/Theme.ListApp</item>
+    </style>
 </resources>

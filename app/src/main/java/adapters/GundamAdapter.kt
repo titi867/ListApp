@@ -1,58 +1,104 @@
 package com.example.listapp.adapters
 
-import android.media.Image
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.example.listapp.models.Gundam
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listapp.R
+import android.widget.*
+import com.bumptech.glide.Glide
+import java.util.Locale
+
 
 class GundamAdapter(
-    private val gundamList: List<Gundam>,
-    private val onFavoriteClick: (Gundam) -> Unit //callback
-)
- : RecyclerView.Adapter<GundamAdapter.ItemViewHolder>() {
+    private var gundamList: MutableList<Gundam>,
+    private val onFavoriteToggle: (Gundam) -> Unit
+) : RecyclerView.Adapter<GundamAdapter.GundamViewHolder>(), Filterable {
 
-        //ViewHolder
-        //Recibe una vista y a partir de ahí sacamos las referencias a los views
-    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val ivName: TextView = view.findViewById(R.id.ivName)
-            val ivDescription: TextView = view.findViewById(R.id.ivDescription)
-            val ivItem: ImageView = view.findViewById(R.id.ivLogo)
-            val ivEsFavorito : ImageView = view.findViewById(R.id.ivIsFavorite)
-        }
+    private var fullList: MutableList<Gundam> = gundamList.toMutableList()
 
-    //Reciber la información del paren que utiliza este ItemAdapter,
-    //genera o infla la vista y retorna un ItemViewHolder
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GundamAdapter.ItemViewHolder
-    {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.layout_gundam, parent, false)
-        return ItemViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GundamViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_gundam, parent, false)
+        return GundamViewHolder(view)
     }
 
-    //Se hace el bind o llenado de información de un item del listado a la vista
-    override fun onBindViewHolder(holder: GundamAdapter.ItemViewHolder, position: Int) {
-        val gundam = gundamList[position]
-        //holder.ivItem.setImageResource(item.ImagenId)
-        holder.ivName.text = gundam.Nombre
-        holder.ivDescription.text = gundam.Tipo
-        holder.ivEsFavorito.setImageResource(
-            if(gundam.EsFavorito)
-                R.drawable.ic_star_filled
-            else
-                R.drawable.ic_star_outline
-        )
-        holder.ivEsFavorito.setOnClickListener {
-            onFavoriteClick(gundam)
+    override fun onBindViewHolder(holder: GundamViewHolder, position: Int) {
+        holder.bind(gundamList[position])
+    }
+
+    override fun getItemCount(): Int = gundamList.size
+
+    inner class GundamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val gundamImage: ImageView = itemView.findViewById(R.id.ivLogo)
+        private val gundamName: TextView = itemView.findViewById(R.id.ivName)
+        private val gundamDescription: TextView = itemView.findViewById(R.id.ivDescription)
+        private val favoriteIcon: ImageView = itemView.findViewById(R.id.ivIsFavorite)
+
+        fun bind(gundam: Gundam) {
+            gundamName.text = gundam.nombre
+            gundamDescription.text = gundam.tipo
+
+            val logo = when (gundam.nombre.toLowerCase(Locale.ROOT)) {
+                "aerial" -> R.drawable.aerial
+                "astray" -> R.drawable.astray
+                "duel blitz" -> R.drawable.duel_blitz
+                "fenice rinascita" -> R.drawable.fenice_rinascita
+                "gunpla" -> R.drawable.gunpla
+                "kimaris" -> R.drawable.kimaris
+                "shin musha" -> R.drawable.shin_musha
+                else -> R.drawable.gundam_logo
+            }
+
+
+            Glide.with(itemView.context)
+                .load(logo)
+                .into(gundamImage)
+
+            favoriteIcon.setImageResource(
+                if(gundam.esFavorito)
+                    R.drawable.ic_star_filled
+                else
+                    R.drawable.ic_star_outline
+            )
+
+            favoriteIcon.setOnClickListener {
+                onFavoriteToggle(gundam)
+            }
         }
     }
 
-    //Función que retorna el tamaño del listado
-    override fun getItemCount() = gundamList.size
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val query = constraint?.toString()?.trim()?.lowercase() ?: ""
+                val filtered = if (query.isEmpty()) {
+                    fullList
+                } else {
+                    fullList.filter {
+                        it.nombre.lowercase().contains(query) || it.tipo.lowercase().contains(query)
+                    }.toMutableList()
+                }
+
+                val results = FilterResults()
+                results.values = filtered
+                return results
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                gundamList = results?.values as? MutableList<Gundam> ?: mutableListOf()
+                notifyDataSetChanged()
+            }
+        }
+    }
+
+    fun updateList(newList: List<Gundam>) {
+        fullList = newList.toMutableList()
+        gundamList = fullList.toMutableList()
+        notifyDataSetChanged()
+    }
 }

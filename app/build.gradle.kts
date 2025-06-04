@@ -56,6 +56,9 @@ android {
         implementation("com.google.firebase:firebase-auth")
         implementation("com.google.firebase:firebase-firestore")
         implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+        implementation("androidx.core:core-splashscreen:1.0.1")
+        implementation("com.google.android.gms:play-services-auth:20.7.0")
+        implementation("com.google.firebase:firebase-auth-ktx")
 
     }
 }

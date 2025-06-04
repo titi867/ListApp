@@ -1,139 +1,133 @@
 package com.example.listapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.listapp.adapters.GundamAdapter
 import com.example.listapp.databinding.FragmentListBinding
 import com.example.listapp.models.Gundam
-import com.google.android.material.snackbar.Snackbar
+import com.example.listapp.models.SearchViewModel
+import com.example.listapp.models.SortOption
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.UUID
-import kotlin.toString
 
 class ListFragment : Fragment() {
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var firestore: FirebaseFirestore
-    private lateinit var binding: FragmentListBinding
-    private var gundamList = mutableListOf<Gundam>()
+    private var _binding: FragmentListBinding? = null
+    private val binding get() = _binding!!
     private lateinit var adapter: GundamAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        auth = FirebaseAuth.getInstance()
-        firestore = FirebaseFirestore.getInstance()
-    }
+    private val db = FirebaseFirestore.getInstance()
+    private val userId = FirebaseAuth.getInstance().currentUser?.uid.orEmpty()
+    private val gundamList = mutableListOf<Gundam>()
+    private val searchViewModel: SearchViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentListBinding.inflate(layoutInflater)
+    ): View {
+        _binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    // TODO ajustar el layout_gundam
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = auth.currentUser
-        val userId = user?.uid
+        adapter = GundamAdapter(gundamList) { gundam ->
+            toggleFavorite(gundam)
+        }
 
-        fetchGundams(userId.toString())
+        binding.rvItems.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvItems.adapter = adapter
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            fetchGundams(userId.toString())
+            fetchGundams()
         }
 
-        val recyclerView = binding.rvItems
-        //define la estructura de cómo se va a estructurar la lista
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        //define la estructura individual de los elementos de la lista
-        //adaptando la información de los elementos de la lista a los views
+        fetchGundams()
 
-        adapter = GundamAdapter(gundamList) { gundam ->
-            toggleFavorite(gundam, userId.toString())
+        searchViewModel.query.observe(viewLifecycleOwner) { query ->
+            applyFilterAndSort(query, searchViewModel.sortOption.value)
         }
-        recyclerView.adapter = adapter
 
-        binding.ivListfragmentLogo.setOnClickListener {
-
-            val newGundam = Gundam(
-                Id = UUID.randomUUID().toString(),
-                Nombre = "Astray",
-                Tipo = "Unit",
-                EsFavorito = false
-            )
-
-            firestore.collection("users")
-                .document(userId.toString())
-                .collection("gundams")
-                .document(newGundam.Id)
-                .set(newGundam)
-                .addOnSuccessListener {
-                    Snackbar.make(view, "Gundam saved", Snackbar.LENGTH_SHORT).show()
-                    fetchGundams(userId.toString())
-                }
-                .addOnFailureListener{
-                    Snackbar.make(view, "Error while saving gundam", Snackbar.LENGTH_SHORT).show()
-                }
+        searchViewModel.sortOption.observe(viewLifecycleOwner) { sortOption ->
+            applyFilterAndSort(searchViewModel.query.value ?: "", sortOption)
         }
     }
 
-    private fun fetchGundams(userId: String) {
-        binding.swipeRefreshLayout.isRefreshing = true
+    private fun fetchGundams() {
+        // Mostrar ProgressBar, ocultar contenido
+        binding.progressBar.visibility = View.VISIBLE
+        binding.swipeRefreshLayout.visibility = View.GONE
+        binding.btnContacto.visibility = View.GONE
 
-        firestore.collection("users")
-            .document(userId.toString())
+        getString(R.string.email)
+        db.collection("users")
+            .document(userId)
             .collection("gundams")
             .get()
             .addOnSuccessListener { result ->
-                gundamList.clear()
-                for(document in result) {
-                    val gundam : Gundam = document.toObject(Gundam::class.java)
-                    gundamList.add(gundam)
+                val items = result.map { doc ->
+                    Gundam(
+                        id = doc.id,
+                        nombre = doc.getString("nombre") ?: "",
+                        tipo = doc.getString("tipo") ?: "",
+                        esFavorito = doc.getBoolean("esFavorito") ?: false
+                    )
                 }
-                adapter.notifyDataSetChanged()
-                binding.swipeRefreshLayout.isRefreshing = false
+                gundamList.clear()
+                gundamList.addAll(items)
+                applyFilterAndSort(searchViewModel.query.value ?: "", searchViewModel.sortOption.value)
 
+                // Ocultar ProgressBar, mostrar contenido
+                binding.progressBar.visibility = View.GONE
+                binding.swipeRefreshLayout.visibility = View.VISIBLE
+                binding.btnContacto.visibility = View.VISIBLE
+                binding.swipeRefreshLayout.isRefreshing = false
             }
             .addOnFailureListener {
-                Snackbar.make(binding.root, "Error loading Gundams", Snackbar.LENGTH_SHORT).show()
+                binding.progressBar.visibility = View.GONE
+                binding.swipeRefreshLayout.visibility = View.VISIBLE
+                binding.btnContacto.visibility = View.VISIBLE
                 binding.swipeRefreshLayout.isRefreshing = false
             }
     }
 
-    private fun toggleFavorite(gundam:Gundam, userId:String){
-        val gundamId = gundam.Id
-        if(gundamId.isNullOrEmpty()){
-            Snackbar.make(binding.root, "Error: gundam id is missing", Snackbar.LENGTH_SHORT).show()
-            return
+
+    private fun toggleFavorite(gundam: Gundam) {
+        val newValue = !gundam.esFavorito
+        db.collection("users")
+            .document(userId)
+            .collection("gundams")
+            .document(gundam.id)
+            .update("esFavorito", newValue)
+            .addOnSuccessListener {
+                gundam.esFavorito = newValue
+                adapter.notifyDataSetChanged()
+            }
+    }
+
+    // Aplica búsqueda y ordenamiento
+    private fun applyFilterAndSort(query: String, sortOption: SortOption?) {
+        val filtered = gundamList.filter {
+            it.nombre.contains(query, ignoreCase = true)
+        }.let {
+            when (sortOption) {
+                SortOption.NAME_ASC -> it.sortedBy { g -> g.nombre }
+                SortOption.NAME_DESC -> it.sortedByDescending { g -> g.nombre }
+                SortOption.FAVORITES_FIRST -> it.sortedByDescending { g -> g.esFavorito }
+                else -> it
+            }
         }
 
-        val newStatus = !gundam.EsFavorito
-        firestore.collection("users")
-            .document(userId.toString())
-            .collection("gundams")
-            .document(gundamId)
-            .update("EsFavorito", newStatus)
-            .addOnSuccessListener {
-                gundam.EsFavorito = newStatus
-                adapter.notifyDataSetChanged()
-                Snackbar.make(binding.root, "Gundam favorite updated", Snackbar.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Snackbar.make(binding.root, "Error updating favorite", Snackbar.LENGTH_SHORT).show()
-            }
-
+        adapter.updateList(filtered)
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

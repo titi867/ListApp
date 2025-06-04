@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listapp.adapters.GundamAdapter
 import com.example.listapp.databinding.FragmentFavBinding
-import com.example.listapp.databinding.FragmentListBinding
 import com.example.listapp.models.Gundam
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -67,7 +66,7 @@ class FavFragment : Fragment() {
                 gundamList.clear()
                 for(document in result) {
                     val gundam : Gundam = document.toObject(Gundam::class.java)
-                    if(gundam.EsFavorito)
+                    if(gundam.esFavorito)
                         gundamList.add(gundam)
                 }
                 adapter.notifyDataSetChanged()
@@ -81,21 +80,21 @@ class FavFragment : Fragment() {
     }
 
     private fun toggleFavorite(gundam:Gundam, userId:String){
-        val gundamId = gundam.Id
+        val gundamId = gundam.id
         if(gundamId.isNullOrEmpty()){
             Snackbar.make(binding.root, "Error: gundam id is missing", Snackbar.LENGTH_SHORT).show()
             return
         }
 
-        val newStatus = !gundam.EsFavorito
+        val newStatus = !gundam.esFavorito
         firestore.collection("users")
             .document(userId.toString())
             .collection("gundams")
             .document(gundamId)
-            .update("EsFavorito", newStatus)
+            .update("esFavorito", newStatus)
             .addOnSuccessListener {
-                gundam.EsFavorito = newStatus
-                if(!gundam.EsFavorito){
+                gundam.esFavorito = newStatus
+                if(!gundam.esFavorito){
                     gundamList.remove(gundam)
                 }
                 adapter.notifyDataSetChanged()

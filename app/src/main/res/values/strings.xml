@@ -57,6 +57,10 @@
     <string name="home">Home</string>
     <string name="fav">Favorites</string>
     <string name="list">List</string>
-
+    <string name="error_empty_fields">Please enter email and password</string>
+    <string name="error_invalid_email">Invalid email format</string>
+    <string name="error_creating_user">Error creating user</string>
+    <string name="error_saving_user">Error saving user data</string>
+    <string name="success_user_created">User created successfully</string>
 
 </resources>

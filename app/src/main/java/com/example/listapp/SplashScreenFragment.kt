@@ -15,14 +15,5 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-
-            val currentUser = FirebaseAuth.getInstance().currentUser
-            if(currentUser == null) {
-                findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
-            } else {
-                findNavController().navigate(R.id.action_splashScreenFragment_to_dashboardFragment)
-            }
-        }, 2000)
     }
 }
