@@ -53,11 +53,12 @@
     <string name="logout">Logout</string>
     <string name="sort">Sort</string>
     <string name="search">Search</string>
-    <string name="slideshow">SlideShow</string>
+    <string name="slideshow">Favoritos</string>
     <string name="galery">Models</string>
     <string name="home">Home</string>
     <string name="fav">Favorites</string>
     <string name="list">List</string>
+    <string name="isfavorite">IsFavorite</string>
 
 
 </resources>

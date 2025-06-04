@@ -15,7 +15,7 @@
 
     <item
         android:id="@+id/favFragment"
-        android:icon="@drawable/slide"
+        android:icon="@drawable/heart"
         android:title="@string/slideshow"
     />
 

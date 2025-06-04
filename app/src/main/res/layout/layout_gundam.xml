@@ -41,7 +41,7 @@
         android:layout_weight="1"
         android:layout_height="32dp"
         android:src="@drawable/ic_star_outline"
-        android:contentDescription="IsFavorite"
+        android:contentDescription="@string/isfavorite"
         android:scaleType="centerInside"/>
 
 </LinearLayout>

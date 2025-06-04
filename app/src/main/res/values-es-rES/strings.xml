@@ -53,10 +53,11 @@
     <string name="logout">Salir</string>
     <string name="sort">Ordenar</string>
     <string name="search">Buscar</string>
-    <string name="slideshow">Diapositivas</string>
+    <string name="slideshow">Favoritos</string>
     <string name="galery">Modelos</string>
     <string name="home">Inicio</string>
     <string name="fav">Favoritos</string>
     <string name="list">Lista</string>
+    <string name="isfavorite">EsFavorito</string>
 
 </resources>

@@ -59,9 +59,9 @@ class FavFragment : Fragment() {
     private fun fetchGundams(userId: String) {
         binding.favSwipeRefreshLayout.isRefreshing = true
 
-        firestore.collection("users")
+        firestore.collection("Users")
             .document(userId.toString())
-            .collection("gundams")
+            .collection("Gundams")
             .get()
             .addOnSuccessListener { result ->
                 gundamList.clear()
@@ -83,23 +83,23 @@ class FavFragment : Fragment() {
     private fun toggleFavorite(gundam:Gundam, userId:String){
         val gundamId = gundam.Id
         if(gundamId.isNullOrEmpty()){
-            Snackbar.make(binding.root, "Error: gundam id is missing", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, "Error: Gundam ID is missing", Snackbar.LENGTH_SHORT).show()
             return
         }
 
         val newStatus = !gundam.EsFavorito
-        firestore.collection("users")
+        firestore.collection("Users")
             .document(userId.toString())
-            .collection("gundams")
+            .collection("Gundams")
             .document(gundamId)
-            .update("EsFavorito", newStatus)
+            .update("IsFavorite", newStatus)
             .addOnSuccessListener {
                 gundam.EsFavorito = newStatus
                 if(!gundam.EsFavorito){
                     gundamList.remove(gundam)
                 }
                 adapter.notifyDataSetChanged()
-                Snackbar.make(binding.root, "Gundam favorite updated", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Favorite Gundam updated", Snackbar.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                 Snackbar.make(binding.root, "Error updating favorite", Snackbar.LENGTH_SHORT).show()
