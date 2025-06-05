@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -22,6 +23,7 @@ import com.example.listapp.models.SearchViewModel
 import com.example.listapp.models.SortOption
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlin.getValue
 
 class DashboardFragment : Fragment() {
 
@@ -30,11 +32,10 @@ class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var navController: NavController
     private lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var searchViewModel: SearchViewModel
+    private val searchViewModel: SearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        searchViewModel = ViewModelProvider(requireActivity())[SearchViewModel::class.java]
         setHasOptionsMenu(true)
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
@@ -72,6 +73,16 @@ class DashboardFragment : Fragment() {
         navController = navHostFragment.navController
 
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
+
+        NavigationUI.setupWithNavController(binding.navigation, navController)
+
+        binding.navigation.setNavigationItemSelectedListener { menuItem ->
+            val handled = NavigationUI.onNavDestinationSelected(menuItem, navController)
+            if (handled) {
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            handled
+        }
 
         (requireActivity() as AppCompatActivity).apply {
             setSupportActionBar(binding.toolbar)
@@ -128,25 +139,20 @@ class DashboardFragment : Fragment() {
         return when (item.itemId) {
             R.id.action_logout -> {
                 FirebaseAuth.getInstance().signOut()
-
                 val navOptions = NavOptions.Builder()
                     .setPopUpTo(R.id.loginFragment, true)
                     .build()
-
                 findNavController().navigate(
                     R.id.action_dashboardFragment_to_loginFragment,
                     null,
                     navOptions
                 )
-
                 true
             }
-
             R.id.action_sort -> {
                 showSortDialog()
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -1,47 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp">
-
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="60dp" />
+    android:layout_margin="8dp"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="6dp"
+    android:background="@color/white">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/ivName"
-            android:layout_width="match_parent"
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="12dp"
+            tools:background="@drawable/logo_gundam2"
+            android:contentDescription="@string/logo" />
+
+        <!-- Text content -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:layout_weight="1"
+            android:layout_marginHorizontal="12dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/ivDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold">
-        </TextView>
+            <TextView
+                android:id="@+id/ivName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="Gundam Name" />
 
+            <TextView
+                android:id="@+id/ivDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:text="This is a Gundam description..." />
+        </LinearLayout>
+
+        <!-- Favorite icon -->
+        <ImageView
+            android:id="@+id/ivIsFavorite"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_star_outline"
+            android:contentDescription="@string/fav"
+            android:scaleType="centerInside" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/ivIsFavorite"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_star_outline"
-        android:contentDescription="IsFavorite"
-        android:scaleType="centerInside"/>
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>
