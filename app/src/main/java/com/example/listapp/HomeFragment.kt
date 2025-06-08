@@ -13,7 +13,10 @@ import androidx.core.content.ContextCompat
 import com.example.listapp.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
 
-
+/*
+Fragmento de inicio que maneja interacciones de contacto: llamadas, emails,
+ubicación y WhatsApp, con gestión de permisos.
+ */
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
@@ -45,10 +48,15 @@ class HomeFragment : Fragment() {
         val ivWhatsapp = binding.ivWhatsapp
 
         btnContact.setOnClickListener {
-
             Snackbar.make(it, R.string.sentContact, Snackbar.LENGTH_SHORT).show()
         }
 
+        /*
+        Verifica y solicita permiso para llamadas telefónicas al hacer clic,
+        ejecutando la llamada si ya está concedido.
+
+        Flujo completo: check permission -> request if needed -> launch call intent.
+        */
         ivPhone.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
                     requireContext(),
@@ -65,6 +73,13 @@ class HomeFragment : Fragment() {
             }
         }
 
+        /*
+        Abre el cliente de correo predeterminado con datos prellenados al hacer clic,
+        mostrando selector de apps si hay varias disponibles.
+
+        (Configura intent para enviar email con asunto/cuerpo predefinidos
+        y maneja fallos de disponibilidad).
+         */
         ivMail.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND).apply{
                 type = "text/plain"
@@ -78,6 +93,10 @@ class HomeFragment : Fragment() {
             }
         }
 
+        /*
+        Verifica y solicita permiso de ubicación al hacer clic,
+        abriendo el mapa si ya está concedido.
+         */
         ivAddress.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
                     requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -87,6 +106,13 @@ class HomeFragment : Fragment() {
             }
         }
 
+        /*
+        Abre WhatsApp con un número predefinido al hacer clic,
+        mostrando error si la app no está instalada.
+
+        (Intento directo de abrir chat de WhatsApp validando
+        previamente la disponibilidad de la app).
+         */
         ivWhatsapp.setOnClickListener {
             val uri = Uri.parse("https://wa.me/" + etPhone.text.toString())
             val intent = Intent(Intent.ACTION_VIEW,uri)
@@ -99,18 +125,22 @@ class HomeFragment : Fragment() {
         }
     }
 
-        private fun realizarllamadaPorTelefono(phone:String){
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel: " + phone))
-            startActivity(intent)
-        }
-
-        private fun abrirMapa(){
-
-            val uri = Uri.parse("geo:0,0?q=Estadio+Santiago+Bernabeu")
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
-
-        }
-
+    /*
+    Inicia una llamada telefónica directa usando el número proporcionado,
+    requiriendo el permiso CALL_PHONE.
+     */
+    private fun realizarllamadaPorTelefono(phone:String){
+        val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel: " + phone))
+        startActivity(intent)
     }
+
+    /*
+    Abre la app de mapas predeterminada mostrando la ubicación del Estadio Santiago Bernabéu.
+     */
+    private fun abrirMapa(){
+        val uri = Uri.parse("geo:0,0?q=Estadio+Santiago+Bernabeu")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
+    }
+}
 

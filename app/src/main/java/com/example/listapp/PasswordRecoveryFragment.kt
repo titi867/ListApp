@@ -14,6 +14,12 @@ import com.example.listapp.databinding.FragmentPasswordRecoveryBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
+/*
+Fragmento para recuperación de contraseña: valida email y envía link de reset via Firebase Auth,
+con navegación automática al login.
+
+(Flujo completo: validación de formato → envío de email → feedback visual → redirección post éxito).
+ */
 class PasswordRecoveryFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
@@ -21,7 +27,6 @@ class PasswordRecoveryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         auth = FirebaseAuth.getInstance()
     }
 
@@ -32,7 +37,6 @@ class PasswordRecoveryFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().navigateUp()
         }
-
         binding = FragmentPasswordRecoveryBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -40,6 +44,12 @@ class PasswordRecoveryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /*
+        Valida el email ingresado y, si es válido, envía un correo de recuperación de
+        contraseña mediante Firebase Auth, mostrando notificaciones de éxito/error.
+
+        (Flujo completo: verificación de formato -> envío de email -> feedback visual -> navegación automática al login tras 2 segundos si es exitoso).
+         */
         binding.btnResetPassword.setOnClickListener {
             val email = binding.etRecoveryEmail.text.toString().trim()
             if(!isValidEmail(email)){
@@ -56,15 +66,10 @@ class PasswordRecoveryFragment : Fragment() {
                     }
                 }
             }
-
         }
-
     }
-
 
     fun isValidEmail(email:String): Boolean{
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
-
-
 }
