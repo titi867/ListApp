@@ -65,5 +65,6 @@
     <string name="success_user_created">User created successfully</string>
     <string name="gundam_name">Gundam Name</string>
     <string name="this_is_a_gundam_description">This is a Gundam description...</string>
+    <string name="default_web_client_id">1023194829429-l8igpnhqccomtusnl59r1iv31n1vo5qn.apps.googleusercontent.com</string>
 
 </resources>
