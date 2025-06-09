@@ -33,27 +33,27 @@ class LoginFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        // Configura opciones de Google Sign-In
-            //. Comando para generar la llave/gradlew signingReport
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("023194829429-l8igpnhqccomtusnl59r1iv31n1vo5qn.apps.googleusercontent.com")
-            .requestEmail()
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-
-        // Inicializa el launcher moderno de resultado de actividad
-        googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == android.app.Activity.RESULT_OK) {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                try {
-                    val account = task.getResult(ApiException::class.java)!!
-                    firebaseAuthWithGoogle(account.idToken!!)
-                } catch (e: ApiException) {
-                    Snackbar.make(binding.root, "Fallo Google Sign-In: ${e.message}", Snackbar.LENGTH_SHORT).show()
-                }
-            }
-        }
+//        // Configura opciones de Google Sign-In
+//        // . Comando para generar la llave/gradlew signingReport
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken("1023194829429-l8igpnhqccomtusnl59r1iv31n1vo5qn.apps.googleusercontent.com")
+//            .requestEmail()
+//            .build()
+//
+//        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+//
+//        // Inicializa el launcher moderno de resultado de actividad
+//        googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//            if (result.resultCode == android.app.Activity.RESULT_OK) {
+//                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+//                try {
+//                    val account = task.getResult(ApiException::class.java)!!
+//                    firebaseAuthWithGoogle(account.idToken!!)
+//                } catch (e: ApiException) {
+//                    Snackbar.make(binding.root, "Fallo Google Sign-In: ${e.message}", Snackbar.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
     }
 
     override fun onCreateView(
@@ -94,10 +94,10 @@ class LoginFragment : Fragment() {
         }
 
         // Google Sign-In
-        binding.btnGoogle.setOnClickListener {
-            val signInIntent = googleSignInClient.signInIntent
-            googleSignInLauncher.launch(signInIntent)
-        }
+//        binding.btnGoogle.setOnClickListener {
+//            val signInIntent = googleSignInClient.signInIntent
+//            googleSignInLauncher.launch(signInIntent)
+//        }
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
@@ -149,4 +149,5 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
 }

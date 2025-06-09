@@ -23,6 +23,8 @@ import com.example.listapp.models.SortOption
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.getValue
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 
 /*
 * Fragmento principal que maneja: navegación con drawer/bottom-nav, perfil de usuario, búsqueda,
@@ -52,7 +54,8 @@ class DashboardFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //Habilita el menú de opciones en el fragmento para mostrar elementos en la ActionBar/Toolbar.
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
+
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
     }
@@ -77,6 +80,77 @@ class DashboardFragment : Fragment() {
     * */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().addMenuProvider(object : MenuProvider {
+
+            lateinit var menuView: Menu
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Infla tu menú aquí
+                menuInflater.inflate(R.menu.toolbar, menu)
+                menuView = menu
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Maneja los clics del menú aquí
+                return when (menuItem.itemId) {
+                    R.id.action_logout -> {
+                        // Cierra la sesión actual del usuario en Firebase Authentication.
+                        FirebaseAuth.getInstance().signOut()
+                        /*
+                         * Configura y ejecuta la navegación al login, limpiando el backstack
+                         * para evitar regresar al dashboard.
+                         */
+                        val navOptions = NavOptions.Builder()
+                            .setPopUpTo(R.id.loginFragment, true)
+                            .build()
+                        findNavController().navigate(
+                            R.id.action_dashboardFragment_to_loginFragment,
+                            null,
+                            navOptions
+                        )
+                        true
+                    }
+                    R.id.action_sort -> {
+                        showSortDialog()
+                        true
+                    }
+                    R.id.action_search -> {
+
+                        val searchItem = menuView.findItem(R.id.action_search)
+                        val searchView = searchItem.actionView as SearchView
+
+                        searchView.queryHint = getString(R.string.search)
+                        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                            /*
+                            * Procesa la búsqueda confirmada: oculta el teclado, guarda el query
+                            * en el ViewModel y navega al fragmento de lista si no está visible.
+                            * */
+                            override fun onQueryTextSubmit(query: String?): Boolean {
+                                searchView.clearFocus()
+                                searchViewModel.setQuery(query.orEmpty())
+
+                                if (navController.currentDestination?.id != R.id.listFragment) {
+                                    navController.navigate(R.id.listFragment)
+                                }
+                                return true
+                            }
+
+                            /*
+                            * Actualiza el ViewModel con cada cambio de texto en la búsqueda
+                            * para filtrado en tiempo real.
+                            * */
+                            override fun onQueryTextChange(newText: String?): Boolean {
+                                searchViewModel.setQuery(newText.orEmpty())
+                                return true
+                            }
+                        })
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED) // Solo muestra el menú cuando el Fragment está RESUMED
 
         /*
         * Configura el header del NavigationView: carga el nickname del usuario desde Firestore
@@ -161,78 +235,6 @@ class DashboardFragment : Fragment() {
                 }
             }
         )
-    }
-
-    /*
-    * Configura la barra de búsqueda en la Toolbar: actualiza el ViewModel con cada cambio
-    * y navega al listado si es necesario.
-    *
-    * (Infla el menú de búsqueda y sincroniza el texto ingresado con el ViewModel
-    * para filtrado en tiempo real).
-    * */
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar, menu)
-
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
-
-        searchView.queryHint = getString(R.string.search)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            /*
-            * Procesa la búsqueda confirmada: oculta el teclado, guarda el query
-            * en el ViewModel y navega al fragmento de lista si no está visible.
-            * */
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
-                searchViewModel.setQuery(query.orEmpty())
-
-                if (navController.currentDestination?.id != R.id.listFragment) {
-                    navController.navigate(R.id.listFragment)
-                }
-                return true
-            }
-
-            /*
-            * Actualiza el ViewModel con cada cambio de texto en la búsqueda
-            * para filtrado en tiempo real.
-            * */
-            override fun onQueryTextChange(newText: String?): Boolean {
-                searchViewModel.setQuery(newText.orEmpty())
-                return true
-            }
-        })
-    }
-
-    /*
-    * Selector de acciones para logout y ordenación,
-    * con navegación gestionada por Navigation Component.
-    * */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_logout -> {
-                // Cierra la sesión actual del usuario en Firebase Authentication.
-                FirebaseAuth.getInstance().signOut()
-
-                /*
-                 * Configura y ejecuta la navegación al login, limpiando el backstack
-                 * para evitar regresar al dashboard.
-                 */
-                val navOptions = NavOptions.Builder()
-                    .setPopUpTo(R.id.loginFragment, true)
-                    .build()
-                findNavController().navigate(
-                    R.id.action_dashboardFragment_to_loginFragment,
-                    null,
-                    navOptions
-                )
-                true
-            }
-            R.id.action_sort -> {
-                showSortDialog()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     /*
