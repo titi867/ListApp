@@ -34,6 +34,7 @@
 
          <ImageView
              android:id="@+id/ivPhoto"
+             android:contentDescription=""
              android:layout_width="82dp"
              android:layout_height="82dp"
              android:layout_marginStart="28dp"
@@ -141,7 +142,7 @@
              android:layout_height="wrap_content"
              android:layout_marginStart="28dp"
              android:layout_marginTop="18dp"
-             android:text="PASSWORD"
+             android:text="@string/form_password"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFormEmail"
              android:textColor="@color/white"/>

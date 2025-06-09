@@ -43,6 +43,7 @@
     <string name="birthday">BIRTHDAY</string>
     <string name="enter_your_birthday">Enter your birthday</string>
     <string name="form_mail">EMAIL</string>
+    <string name="form_password">PASSWORD</string>
     <string name="form_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
     <string name="Form_sign_up">Sign Up</string>
@@ -62,5 +63,7 @@
     <string name="error_creating_user">Error creating user</string>
     <string name="error_saving_user">Error saving user data</string>
     <string name="success_user_created">User created successfully</string>
+    <string name="gundam_name">Gundam Name</string>
+    <string name="this_is_a_gundam_description">This is a Gundam description...</string>
 
 </resources>

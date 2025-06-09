@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/ivProfilePhoto"
+        android:contentDescription=""
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_gravity="start"

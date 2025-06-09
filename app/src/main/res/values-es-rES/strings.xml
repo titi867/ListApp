@@ -44,6 +44,7 @@
     <string name="enter_your_birthday">Ingresa tu cumpleaños</string>
     <string name="form_mail">CORREO</string>
     <string name="form_your_email">Ingresa tu correo electrónico</string>
+    <string name="form_password">CONTRASEÑA</string>
     <string name="enter_your_password">Ingresa tu contraseña</string>
     <string name="Form_sign_up">Registrar</string>
     <string name="log_in">Iniciar sesión</string>
@@ -57,9 +58,11 @@
     <string name="home">Inicio</string>
     <string name="fav">Favoritos</string>
     <string name="list">Lista</string>
-    <string name="error_empty_fields">Please enter email and password</string>
-    <string name="error_invalid_email">Invalid email format</string>
-    <string name="error_creating_user">Error creating user</string>
-    <string name="error_saving_user">Error saving user data</string>
-    <string name="success_user_created">User created successfully</string>
+    <string name="error_empty_fields">Por favor ingrese correo y contraseña</string>
+    <string name="error_invalid_email">Formato de correo inválido</string>
+    <string name="error_creating_user">Error al crear usuario</string>
+    <string name="error_saving_user">Error al salvar la información del usuario</string>
+    <string name="success_user_created">Usuario creado exitosamente</string>
+    <string name="gundam_name">Nombre del Gundam</string>
+    <string name="this_is_a_gundam_description">Esta es una descripción de Gundam...</string>
 </resources>

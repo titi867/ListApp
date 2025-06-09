@@ -17,7 +17,7 @@ import java.util.Locale
 //se muestra cada elemento de la lista
 class GundamAdapter(
     private var gundamList: MutableList<Gundam>,//Lista de gundams
-    private val onFavoriteToggle: (Gundam) -> Unit //calback para activar o desactivar gundam favorito
+    private val onFavoriteToggle: (Gundam) -> Unit //callback para activar o desactivar gundam favorito
 ) : RecyclerView.Adapter<GundamAdapter.GundamViewHolder>(), Filterable {
 
     //esta lista sirve para mantener una copia de respaldo del listado de gundams
@@ -30,7 +30,7 @@ class GundamAdapter(
         return GundamViewHolder(view)
     }
 
-    //oma un modelo Gundam de la lista y lo "pinta" en las vistas del ViewHolder
+    //toma un modelo Gundam de la lista y lo "pinta" en las vistas del ViewHolder
     override fun onBindViewHolder(holder: GundamViewHolder, position: Int) {
         holder.bind(gundamList[position])
     }

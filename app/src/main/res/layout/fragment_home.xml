@@ -15,6 +15,7 @@
 
     <ImageView
         android:id="@+id/logo_gundam"
+        android:contentDescription=""
         android:layout_width="343dp"
         android:layout_height="102dp"
         android:layout_marginTop="36dp"
@@ -131,6 +132,7 @@
 
     <ImageView
         android:id="@+id/ivMap"
+        android:contentDescription=""
         android:layout_width="318dp"
         android:layout_height="210dp"
         android:layout_marginTop="5dp"
