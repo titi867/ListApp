@@ -37,6 +37,7 @@ class LoginFragment : Fragment() {
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var credentialManager: CredentialManager
 
+    /* COMENTARIO ALEATORIO*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
