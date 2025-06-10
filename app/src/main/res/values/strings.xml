@@ -53,9 +53,9 @@
     <string name="logout">Logout</string>
     <string name="sort">Sort</string>
     <string name="search">Search</string>
-    <string name="slideshow">SlideShow</string>
-    <string name="galery">Models</string>
-    <string name="home">Home</string>
+    <string name="slideshow">Multimedia</string>
+    <string name="galery">Programación</string>
+    <string name="home">Examen</string>
     <string name="fav">Favorites</string>
     <string name="list">List</string>
     <string name="error_empty_fields">Please enter email and password</string>
@@ -66,5 +66,8 @@
     <string name="gundam_name">Gundam Name</string>
     <string name="this_is_a_gundam_description">This is a Gundam description...</string>
     <string name="default_web_client_id">1072754476250-a24qml4sfar177tvks2nobgkhh0d8q33.apps.googleusercontent.com</string>
+    <string name="examen_prog" translatable="false">Móviles</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

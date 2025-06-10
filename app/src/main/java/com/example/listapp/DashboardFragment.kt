@@ -2,9 +2,11 @@ package com.example.listapp
 
 import android.os.Bundle
 import android.view.*
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.getValue
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
+import com.example.listapp.databinding.FragmentFormBinding
+import java.io.File
 
 /*
 * Fragmento principal que maneja: navegación con drawer/bottom-nav, perfil de usuario, búsqueda,
@@ -102,10 +106,10 @@ class DashboardFragment : Fragment() {
                          * para evitar regresar al dashboard.
                          */
                         val navOptions = NavOptions.Builder()
-                            .setPopUpTo(R.id.loginFragment, true)
+                            .setPopUpTo(R.id.examenFragment, true)
                             .build()
                         findNavController().navigate(
-                            R.id.action_dashboardFragment_to_loginFragment,
+                            R.id.action_dashboardFragment_to_examenFragment,
                             null,
                             navOptions
                         )
@@ -130,8 +134,8 @@ class DashboardFragment : Fragment() {
                                 searchView.clearFocus()
                                 searchViewModel.setQuery(query.orEmpty())
 
-                                if (navController.currentDestination?.id != R.id.listFragment) {
-                                    navController.navigate(R.id.listFragment)
+                                if (navController.currentDestination?.id != R.id.examenFragment) {
+                                    navController.navigate(R.id.examenFragment)
                                 }
                                 return true
                             }
@@ -268,4 +272,5 @@ class DashboardFragment : Fragment() {
             }
             .show()
     }
+
 }

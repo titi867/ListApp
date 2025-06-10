@@ -45,7 +45,16 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <action
-            android:id="@+id/action_dashboardFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_dashboardFragment_to_examenFragment"
+            app:destination="@id/examenFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/examenFragment"
+        android:name="com.example.listapp.ExamenFragment"
+        android:label="fragment_examen"
+        tools:layout="@layout/fragment_examen" />
+
+
+
+
 </navigation>

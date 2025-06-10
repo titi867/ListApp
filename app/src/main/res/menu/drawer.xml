@@ -3,20 +3,26 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/home"
+        android:icon="@drawable/logout"
         android:title="@string/home"
     />
 
     <item
         android:id="@+id/listFragment"
-        android:icon="@drawable/menu"
+        android:icon="@drawable/kebab"
         android:title="@string/galery"
     />
 
     <item
         android:id="@+id/favFragment"
-        android:icon="@drawable/slide"
+        android:icon="@drawable/icongmail"
         android:title="@string/slideshow"
     />
+
+    <item
+        android:id="@+id/heartFragment"
+        android:icon="@drawable/heart"
+        android:title="@string/examen_prog"
+        />
 
 </menu>
