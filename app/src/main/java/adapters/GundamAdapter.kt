@@ -30,7 +30,7 @@ class GundamAdapter(
         return GundamViewHolder(view)
     }
 
-    //toma un modelo Gundam de la lista y lo "pinta" en las vistas del ViewHolder
+    //tAstoma un modelo Gundam de la lista y lo "pinta" en las vistas del ViewHolder
     override fun onBindViewHolder(holder: GundamViewHolder, position: Int) {
         holder.bind(gundamList[position])
     }

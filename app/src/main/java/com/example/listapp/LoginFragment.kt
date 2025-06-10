@@ -187,12 +187,12 @@ class LoginFragment : Fragment() {
                                 findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment)
                             }
                         }.addOnFailureListener {
-                        Snackbar.make(
-                            view,
-                            "Datos del usuario no encontrados",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
+                            Snackbar.make(
+                                view,
+                                "Datos del usuario no encontrados",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
                 }
             } else {
                 Snackbar.make(view, "Login fallido", Snackbar.LENGTH_SHORT).show()

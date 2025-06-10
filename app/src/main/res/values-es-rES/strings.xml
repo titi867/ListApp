@@ -65,4 +65,6 @@
     <string name="success_user_created">Usuario creado exitosamente</string>
     <string name="gundam_name">Nombre del Gundam</string>
     <string name="this_is_a_gundam_description">Esta es una descripción de Gundam...</string>
+    <string name="default_web_client_id">1072754476250-a24qml4sfar177tvks2nobgkhh0d8q33.apps.googleusercontent.com</string>
+
 </resources>
